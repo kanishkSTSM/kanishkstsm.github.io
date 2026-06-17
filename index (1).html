@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>A Day Without Technology — Kanishk</title>
+<meta name="description" content="A Day Without Technology — an LCA Club Activity slideshow by Kanishk, Grade 9, Sloka The School, Manikonda.">
+<style>
+  :root{
+    --navy:#2F3C7E;
+    --navy-deep:#1A1F3D;
+    --coral:#F96167;
+    --coral-deep:#E14B52;
+    --gold:#F9E795;
+    --cream:#FFF9F2;
+    --ink:#2B2B2B;
+    --muted:#6B6B7A;
+    --muted-light:#A9ADD0;
+    --white:#FFFFFF;
+    --radius:18px;
+    --shadow:0 10px 30px rgba(26,31,61,0.10);
+  }
+
+  *{box-sizing:border-box;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  html,body{
+    margin:0;
+    height:100%;
+    overflow:hidden;
+    font-family:Calibri, 'Segoe UI', Arial, sans-serif;
+    color:var(--ink);
+    background:var(--navy-deep);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:Cambria, 'Times New Roman', serif;
+    margin:0;
+  }
+
+  ::selection{background:var(--coral); color:var(--white);}
+
+  /* ---------- DECK / SLIDE FRAME ---------- */
+  .deck{
+    position:relative;
+    width:100%;
+    height:100%;
+    height:100dvh;
+    overflow:hidden;
+  }
+
+  .slide{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:clamp(28px, 5vw, 70px) clamp(20px, 6vw, 90px);
+    opacity:0;
+    pointer-events:none;
+    transform:translateX(40px);
+    transition:opacity 0.45s ease, transform 0.45s ease;
+    overflow-y:auto;
+  }
+  .slide::-webkit-scrollbar{width:0; height:0;}
+
+  .slide.active{
+    opacity:1;
+    pointer-events:auto;
+    transform:translateX(0);
+    z-index:5;
+  }
+  .slide.prev-exit{
+    transform:translateX(-40px);
+  }
+  .slide.next-exit{
+    transform:translateX(40px);
+  }
+
+  .slide-inner{
+    width:100%;
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  /* background variants */
+  .bg-navy{background:var(--navy-deep); color:var(--white);}
+  .bg-cream{background:var(--cream); color:var(--ink);}
+  .bg-white{background:var(--white); color:var(--ink);}
+  .bg-coral{background:var(--coral); color:var(--white);}
+  .bg-navy-mid{background:var(--navy); color:var(--white);}
+
+  .blob{
+    position:absolute;
+    border-radius:50%;
+    pointer-events:none;
+  }
+
+  /* ---------- TYPE HELPERS ---------- */
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.74rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:bold;
+    margin-bottom:14px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;display:inline-block;}
+
+  .slide h2.title{
+    font-size:clamp(1.7rem, 4.4vw, 2.7rem);
+    line-height:1.15;
+    margin-bottom:14px;
+  }
+  .slide p.subtitle{
+    font-size:clamp(0.95rem, 1.6vw, 1.12rem);
+    line-height:1.55;
+    max-width:680px;
+    margin-bottom:0;
+  }
+  .head-block{
+    text-align:center;
+    margin-bottom:clamp(22px, 4vw, 40px);
+  }
+  .head-block.left{text-align:left; margin-left:0; margin-right:auto;}
+  .head-block p.subtitle{margin-left:auto; margin-right:auto;}
+  .head-block.left p.subtitle{margin-left:0;}
+
+  /* ---------- ICON CIRCLES ---------- */
+  .icon-circle{
+    width:clamp(40px,5vw,52px);
+    height:clamp(40px,5vw,52px);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    font-size:clamp(1.05rem,2vw,1.3rem);
+  }
+
+  /* ---------- SLIDE 1: TITLE ---------- */
+  .title-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:clamp(24px,5vw,48px);
+    align-items:center;
+    width:100%;
+  }
+  .clock-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:24px;
+    padding:clamp(20px,3vw,34px) clamp(18px,3vw,28px);
+    text-align:center;
+    box-shadow:0 20px 50px rgba(0,0,0,0.25);
+  }
+  .clock-label{
+    font-size:0.7rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--muted-light);
+    margin-bottom:12px;
+  }
+  .clock-display{
+    font-family:'Courier New', Courier, monospace;
+    font-size:clamp(1.9rem, 5.5vw, 2.8rem);
+    font-weight:bold;
+    color:var(--gold);
+  }
+  .clock-sub{margin-top:10px; font-size:0.8rem; color:var(--muted-light);}
+  .power-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top:16px; padding:7px 14px; border-radius:999px;
+    background:rgba(249,97,103,0.15); color:var(--coral);
+    font-size:0.78rem; font-weight:600;
+  }
+  .power-dot{width:7px;height:7px;border-radius:50%;background:var(--coral); animation:pulse 1.6s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1; transform:scale(1);} 50%{opacity:0.4; transform:scale(0.8);}}
+
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:8px 16px;
+    font-size:clamp(0.78rem,1.4vw,0.88rem); color:var(--muted-light);
+    margin-top:20px;
+  }
+  .hero-meta b{color:var(--white);}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:11px 22px; border-radius:999px;
+    font-size:0.88rem; font-weight:600; border:none; cursor:pointer;
+    background:var(--coral); color:var(--white);
+    box-shadow:0 8px 20px rgba(249,97,103,0.35);
+    margin-top:24px;
+  }
+
+  /* ---------- TRIO / GRID CARDS ---------- */
+  .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(12px,2vw,20px); width:100%;}
+  .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:clamp(12px,2vw,20px); width:100%;}
+  .grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(10px,1.6vw,16px); width:100%;}
+  .grid-6{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(10px,1.6vw,16px); width:100%;}
+
+  .card{
+    background:rgba(255,255,255,0.65);
+    border-radius:14px;
+    padding:clamp(14px,2.2vw,22px);
+    box-shadow:var(--shadow);
+  }
+  .bg-cream .card, .bg-white .card{background:var(--white);}
+  .card.tinted{background:var(--cream); box-shadow:none;}
+  .card.center{text-align:center;}
+  .card .icon-circle{margin-bottom:12px;}
+  .card.center .icon-circle{margin:0 auto 12px;}
+  .card h3,.card h4{font-size:clamp(0.92rem,1.6vw,1.05rem); margin-bottom:6px; color:var(--navy);}
+  .card p{font-size:clamp(0.78rem,1.3vw,0.9rem); color:var(--muted); margin:0; line-height:1.45;}
+
+  .feature-row{display:flex; gap:14px;}
+  .feature-row .icon-circle{background:var(--navy); color:var(--white);}
+
+  /* ---------- COMMUNICATION two-col ---------- */
+  .topic-grid{display:grid; grid-template-columns:1fr 1fr; gap:clamp(20px,3vw,32px); width:100%;}
+  .topic-col h4{font-size:clamp(0.85rem,1.4vw,0.95rem); color:var(--navy); margin-bottom:12px; font-weight:700;}
+  .topic-col ul{list-style:none; margin:0 0 14px; padding:0;}
+  .topic-col li{position:relative; padding-left:18px; margin-bottom:9px; font-size:clamp(0.8rem,1.4vw,0.92rem); line-height:1.4;}
+  .topic-col li::before{content:""; position:absolute; left:0; top:0.5em; width:6px; height:6px; border-radius:50%; background:var(--coral);}
+  .callout{background:#FDEDEE; border-radius:12px; padding:14px 16px; font-size:clamp(0.76rem,1.3vw,0.86rem); line-height:1.5;}
+  .callout b{color:var(--coral-deep);}
+
+  /* ---------- BALANCE (advantages/disadvantages combined per slide) ---------- */
+  .balance-card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:var(--radius);
+    padding:clamp(16px,2.6vw,26px);
+  }
+  .balance-card.good{border-color:rgba(76,175,125,0.3);}
+  .balance-card.bad{border-color:rgba(249,97,103,0.3);}
+  .balance-head{display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  .balance-head .icon-circle{width:36px; height:36px; font-size:0.95rem;}
+  .balance-head h3{font-size:clamp(1rem,1.8vw,1.2rem); color:var(--white);}
+  .balance-card.good .icon-circle{background:#4CAF7D; color:var(--white);}
+  .balance-card.bad .icon-circle{background:var(--coral); color:var(--white);}
+  .balance-card ul{list-style:none; margin:0; padding:0;}
+  .balance-card li{position:relative; padding-left:20px; margin-bottom:9px; font-size:clamp(0.78rem,1.3vw,0.88rem); color:var(--muted-light); line-height:1.4;}
+  .balance-card.good li::before{content:"+"; position:absolute; left:0; color:#4CAF7D; font-weight:bold;}
+  .balance-card.bad li::before{content:"–"; position:absolute; left:0; color:var(--coral); font-weight:bold;}
+
+  /* ---------- STATS ---------- */
+  .stat-card{
+    background:rgba(255,255,255,0.08);
+    border-radius:var(--radius);
+    padding:clamp(18px,3vw,30px) clamp(12px,2vw,20px);
+    text-align:center;
+  }
+  .stat-big{font-family:Cambria,serif; font-size:clamp(1.6rem,4vw,2.4rem); font-weight:bold; color:var(--gold); margin-bottom:8px;}
+  .stat-label{font-size:clamp(0.74rem,1.3vw,0.85rem); color:var(--muted-light); line-height:1.4;}
+  .stats-source{text-align:center; font-size:clamp(0.7rem,1.2vw,0.8rem); color:var(--muted-light); margin-top:20px; font-style:italic;}
+
+  /* ---------- QUOTES ---------- */
+  .quote-card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:16px;
+    padding:clamp(16px,2.4vw,24px);
+  }
+  .quote-mark{font-family:Cambria,serif; font-size:clamp(1.6rem,3vw,2rem); color:var(--gold); line-height:1; margin-bottom:6px; display:block;}
+  .quote-text{font-family:Cambria,serif; font-style:italic; font-size:clamp(0.86rem,1.6vw,1rem); line-height:1.45; margin:0 0 12px;}
+  .quote-attr{font-size:clamp(0.74rem,1.3vw,0.84rem); color:var(--gold); font-weight:600;}
+  .quote-attr span{color:var(--muted-light); font-weight:400;}
+
+  /* ---------- REFLECTION / CLOSING ---------- */
+  .reflection-text{
+    font-size:clamp(1.2rem, 3.2vw, 1.9rem);
+    font-style:italic;
+    line-height:1.4;
+    text-align:center;
+    max-width:760px;
+    margin:0 auto 16px;
+  }
+  .closing-meta{font-size:clamp(0.8rem,1.4vw,0.92rem); text-align:center; opacity:0.9;}
+
+  /* ---------- NAV CHROME ---------- */
+  .deck-chrome{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:50;
+  }
+  .nav-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:46px; height:46px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.25);
+    color:var(--white);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.2rem;
+    cursor:pointer;
+    pointer-events:auto;
+    backdrop-filter:blur(6px);
+    transition:background 0.2s, transform 0.2s;
+  }
+  .nav-btn:hover{background:rgba(255,255,255,0.22);}
+  .nav-btn:active{transform:translateY(-50%) scale(0.92);}
+  .nav-btn.prev{left:clamp(10px,2vw,28px);}
+  .nav-btn.next{right:clamp(10px,2vw,28px);}
+  .nav-btn[disabled]{opacity:0.25; cursor:default; pointer-events:none;}
+
+  .top-bar{
+    position:absolute;
+    top:0; left:0; right:0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px clamp(14px,3vw,28px);
+    pointer-events:none;
+  }
+  .brand-mini{
+    font-family:Cambria, serif;
+    font-weight:bold;
+    font-size:0.85rem;
+    color:rgba(255,255,255,0.85);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    pointer-events:auto;
+  }
+  .brand-mini .dot{width:7px;height:7px;border-radius:50%;background:var(--coral); display:inline-block;}
+  .counter{
+    font-size:0.78rem;
+    color:rgba(255,255,255,0.75);
+    font-family:'Courier New', monospace;
+    pointer-events:auto;
+    background:rgba(0,0,0,0.18);
+    padding:4px 10px;
+    border-radius:999px;
+  }
+
+  .progress-dots{
+    position:absolute;
+    bottom:clamp(14px,3vw,26px);
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:7px;
+    pointer-events:auto;
+    background:rgba(0,0,0,0.18);
+    padding:8px 12px;
+    border-radius:999px;
+    backdrop-filter:blur(6px);
+    max-width:90vw;
+    overflow-x:auto;
+  }
+  .progress-dots::-webkit-scrollbar{display:none;}
+  .pdot{
+    width:8px; height:8px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.3);
+    border:none;
+    cursor:pointer;
+    flex-shrink:0;
+    transition:background 0.2s, transform 0.2s;
+    padding:0;
+  }
+  .pdot.active{background:var(--coral); transform:scale(1.3);}
+  .pdot:hover{background:rgba(255,255,255,0.6);}
+
+  .progress-bar{
+    position:absolute;
+    top:0; left:0;
+    height:3px;
+    background:var(--coral);
+    transition:width 0.4s ease;
+    z-index:1;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .title-grid{grid-template-columns:1fr; gap:24px;}
+    .clock-card{max-width:280px; margin:0 auto;}
+    .grid-3,.grid-4,.grid-6{grid-template-columns:repeat(2,1fr);}
+    .grid-2{grid-template-columns:1fr;}
+    .topic-grid{grid-template-columns:1fr; gap:18px;}
+    .nav-btn{width:40px; height:40px; font-size:1.05rem;}
+  }
+  @media (max-width:560px){
+    .grid-3,.grid-4,.grid-6{grid-template-columns:repeat(2,1fr);}
+    .slide{padding:24px 16px 70px;}
+    .reflection-text{font-size:clamp(1.05rem,4.6vw,1.4rem);}
+  }
+  @media (max-height:480px){
+    .slide{padding:16px 5vw 56px;}
+  }
+
+  :focus-visible{outline:2px solid var(--coral); outline-offset:3px;}
+
+  .hint{
+    position:absolute;
+    bottom:calc(clamp(14px,3vw,26px) + 38px);
+    left:50%;
+    transform:translateX(-50%);
+    font-size:0.72rem;
+    color:rgba(255,255,255,0.45);
+    pointer-events:none;
+    white-space:nowrap;
+  }
+  @media (max-width:560px){ .hint{display:none;} }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1: TITLE -->
+  <section class="slide bg-navy" data-bg="navy">
+    <div class="blob" style="top:-110px;right:-90px;width:340px;height:340px;background:radial-gradient(circle at 30% 30%, rgba(249,97,103,0.35), rgba(249,97,103,0) 70%);"></div>
+    <div class="blob" style="bottom:-140px;left:-110px;width:380px;height:380px;background:radial-gradient(circle at 60% 40%, rgba(249,231,149,0.18), rgba(249,231,149,0) 70%);"></div>
+    <div class="slide-inner title-grid" style="position:relative;z-index:2;">
+      <div>
+        <div class="eyebrow" style="color:var(--gold);"><span class="dot" style="background:var(--gold);"></span>LCA Club Activity · Grade 9</div>
+        <h1 style="font-size:clamp(2rem,6vw,3.4rem); line-height:1.08;">A Day Without<br><span style="color:var(--gold);">Technology</span></h1>
+        <p style="font-size:clamp(0.92rem,1.8vw,1.05rem); color:var(--muted-light); max-width:460px; margin-top:16px; line-height:1.55;">Unplugging from screens for 24 hours — what would we gain, what would we miss, and what would we finally notice?</p>
+        <div class="hero-meta">
+          <span>By <b>Kanishk</b></span><span>·</span><span><b>Sloka The School</b>, Manikonda</span>
+        </div>
+        <button class="btn" onclick="goTo(1)">Start Presentation →</button>
+      </div>
+      <div class="clock-card">
+        <div class="clock-label">Hours Without Screens</div>
+        <div class="clock-display" id="clockDisplay">24:00:00</div>
+        <div class="clock-sub">One full day. Zero devices.</div>
+        <div class="power-pill"><span class="power-dot"></span> Devices powered off</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: HOOK -->
+  <section class="slide bg-cream">
+    <div class="slide-inner">
+      <div class="head-block">
+        <div class="eyebrow" style="color:var(--coral);"><span class="dot" style="background:var(--coral);"></span>The Thought Experiment</div>
+        <h2 class="title" style="color:var(--navy);">Imagine Waking Up Tomorrow…</h2>
+        <p class="subtitle" style="color:var(--muted);">No phone. No Wi-Fi. No screens at all — for 24 hours. Technology is woven into nearly every minute of our day, so what actually happens when we take it all away?</p>
+      </div>
+      <div class="grid-3">
+        <div class="card center">
+          <div class="icon-circle" style="background:var(--coral); color:var(--white); margin:0 auto 12px;">📵</div>
+          <h3>No Phone</h3><p>No calls, no texts</p>
+        </div>
+        <div class="card center">
+          <div class="icon-circle" style="background:var(--coral); color:var(--white); margin:0 auto 12px;">📡</div>
+          <h3>No Internet</h3><p>No browsing, no apps</p>
+        </div>
+        <div class="card center">
+          <div class="icon-circle" style="background:var(--coral); color:var(--white); margin:0 auto 12px;">💻</div>
+          <h3>No Screens</h3><p>No TV, no laptop</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: COMMUNICATION -->
+  <section class="slide bg-white">
+    <div class="slide-inner">
+      <div class="head-block left">
+        <div class="eyebrow" style="color:var(--coral);"><span class="dot" style="background:var(--coral);"></span>Staying in Touch</div>
+        <h2 class="title" style="color:var(--navy);">Communication Without Phones or the Internet</h2>
+        <p class="subtitle" style="color:var(--muted);">When the fastest way to reach someone is on foot or by letter, conversations change shape entirely.</p>
+      </div>
+      <div class="topic-grid">
+        <div class="topic-col">
+          <h4>What Changes</h4>
+          <ul>
+            <li>Letters and handwritten notes make a comeback</li>
+            <li>Face-to-face conversations replace texting</li>
+            <li>Visiting a friend's home instead of a video call</li>
+          </ul>
+          <div class="callout"><b>The Upside:</b> Conversations slow down. People listen more, interrupt less, and remember details better.</div>
+        </div>
+        <div class="topic-col">
+          <h4>The Challenge</h4>
+          <ul>
+            <li>Messages take longer — patience becomes essential</li>
+            <li>Coordinating plans with many people gets harder</li>
+            <li>Emergency contact becomes slower and riskier</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: EDUCATION -->
+  <section class="slide bg-cream">
+    <div class="slide-inner">
+      <div class="head-block">
+        <div class="eyebrow" style="color:var(--coral);"><span class="dot" style="background:var(--coral);"></span>Learning Differently</div>
+        <h2 class="title" style="color:var(--navy);">Education Without Technology</h2>
+        <p class="subtitle" style="color:var(--muted);">Knowledge doesn't disappear without the internet — it just travels through different channels.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card feature-row">
+          <div class="icon-circle">📖</div>
+          <div><h4>Back to Books</h4><p>Libraries and printed textbooks become the main source of knowledge instead of instant search engines.</p></div>
+        </div>
+        <div class="card feature-row">
+          <div class="icon-circle">✍️</div>
+          <div><h4>Handwritten Learning</h4><p>Notes, essays, and projects are written by hand — slower, but often better remembered.</p></div>
+        </div>
+        <div class="card feature-row">
+          <div class="icon-circle">👥</div>
+          <div><h4>Group Study &amp; Discussion</h4><p>Students rely on classmates, teachers, and discussion groups rather than online tutorials.</p></div>
+        </div>
+        <div class="card feature-row">
+          <div class="icon-circle">🧠</div>
+          <div><h4>Deeper Focus</h4><p>Without notifications, studying becomes a single, focused task instead of constant multitasking.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: ACTIVITIES -->
+  <section class="slide bg-white">
+    <div class="slide-inner">
+      <div class="head-block">
+        <div class="eyebrow" style="color:var(--coral);"><span class="dot" style="background:var(--coral);"></span>Filling the Hours</div>
+        <h2 class="title" style="color:var(--navy);">Daily Activities &amp; Entertainment</h2>
+        <p class="subtitle" style="color:var(--muted);">How would we fill the hours usually spent on screens?</p>
+      </div>
+      <div class="grid-6">
+        <div class="card tinted center"><div class="icon-circle" style="background:#5FA777;color:#fff;margin:0 auto 10px;">🌳</div><h4>Outdoor Play</h4></div>
+        <div class="card tinted center"><div class="icon-circle" style="background:#F96167;color:#fff;margin:0 auto 10px;">🎨</div><h4>Art &amp; Crafts</h4></div>
+        <div class="card tinted center"><div class="icon-circle" style="background:#2F3C7E;color:#fff;margin:0 auto 10px;">♟️</div><h4>Board Games</h4></div>
+        <div class="card tinted center"><div class="icon-circle" style="background:#C18A2D;color:#fff;margin:0 auto 10px;">📚</div><h4>Reading Books</h4></div>
+        <div class="card tinted center"><div class="icon-circle" style="background:#8B5E3C;color:#fff;margin:0 auto 10px;">🍽️</div><h4>Family Meals</h4></div>
+        <div class="card tinted center"><div class="icon-circle" style="background:#3D8B8B;color:#fff;margin:0 auto 10px;">🚶</div><h4>Walks Outside</h4></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: ADVANTAGES & DISADVANTAGES -->
+  <section class="slide bg-navy-mid">
+    <div class="slide-inner">
+      <div class="head-block">
+        <div class="eyebrow" style="color:var(--gold);"><span class="dot" style="background:var(--gold);"></span>Weighing It Up</div>
+        <h2 class="title" style="color:var(--white);">Advantages &amp; Disadvantages</h2>
+        <p class="subtitle" style="color:var(--muted-light);">A day without devices isn't simply good or bad — it's a trade-off worth understanding.</p>
+      </div>
+      <div class="grid-2">
+        <div class="balance-card good">
+          <div class="balance-head"><div class="icon-circle">✓</div><h3>Advantages</h3></div>
+          <ul>
+            <li>Better focus — fewer notifications, deeper concentration</li>
+            <li>Improved sleep — no late-night screens</li>
+            <li>Real connection — more time with family and friends</li>
+            <li>More activity — movement, outdoor play, exercise</li>
+          </ul>
+        </div>
+        <div class="balance-card bad">
+          <div class="balance-head"><div class="icon-circle">✕</div><h3>Disadvantages</h3></div>
+          <ul>
+            <li>Slower tasks — even paying bills takes longer</li>
+            <li>Delayed information — news arrives late</li>
+            <li>Emergency risk — harder to reach help quickly</li>
+            <li>Work &amp; study limits — online classes become impossible</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: WHY TECH MATTERS -->
+  <section class="slide bg-cream">
+    <div class="slide-inner">
+      <div class="head-block">
+        <div class="eyebrow" style="color:var(--coral);"><span class="dot" style="background:var(--coral);"></span>The Bigger Picture</div>
+        <h2 class="title" style="color:var(--navy);">Why Technology Matters in Modern Life</h2>
+        <p class="subtitle" style="color:var(--muted);">A day without it is a thought experiment — but technology's role in the other 364 days is hard to overstate.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card feature-row"><div class="icon-circle">🌐</div><div><h4>Connects the World</h4><p>Instant communication links families, friends, and communities across distances.</p></div></div>
+        <div class="card feature-row"><div class="icon-circle">🎓</div><div><h4>Powers Learning</h4><p>Online courses and digital libraries open access to knowledge for everyone.</p></div></div>
+        <div class="card feature-row"><div class="icon-circle">🩺</div><div><h4>Drives Healthcare</h4><p>Telemedicine, diagnostics, and research save lives every single day.</p></div></div>
+        <div class="card feature-row"><div class="icon-circle">💼</div><div><h4>Runs Economies</h4><p>Businesses, banking, and global trade depend on digital systems.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 8: STATS -->
+  <section class="slide bg-navy">
+    <div class="slide-inner">
+      <div class="head-block">
+        <div class="eyebrow" style="color:var(--gold);"><span class="dot" style="background:var(--gold);"></span>Did You Know</div>
+        <h2 class="title" style="color:var(--white);">A Few Numbers Worth Sitting With</h2>
+        <p class="subtitle" style="color:var(--muted-light);">Statistics that show how deeply technology shapes our day, every day.</p>
+      </div>
+      <div class="grid-3">
+        <div class="stat-card"><div class="stat-big">6–7 hrs</div><div class="stat-label">average daily screen time for teens worldwide</div></div>
+        <div class="stat-card"><div class="stat-big">96%</div><div class="stat-label">of teens go online daily, many almost constantly</div></div>
+        <div class="stat-card"><div class="stat-big">144</div><div class="stat-label">average phone checks per person, per day</div></div>
+      </div>
+      <p class="stats-source">Source: Common Sense Media &amp; Pew Research, teen digital media use surveys</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 9: LESSONS -->
+  <section class="slide bg-white">
+    <div class="slide-inner">
+      <div class="head-block">
+        <div class="eyebrow" style="color:var(--coral);"><span class="dot" style="background:var(--coral);"></span>Takeaways</div>
+        <h2 class="title" style="color:var(--navy);">Lessons We Can Learn</h2>
+        <p class="subtitle" style="color:var(--muted);">From a single technology-free day, a few ideas worth carrying into every day.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card tinted feature-row"><div class="icon-circle" style="background:var(--coral);color:#fff;">⚖️</div><div><h4>Balance Matters</h4><p>Technology is a tool, not a lifestyle — use it with intention.</p></div></div>
+        <div class="card tinted feature-row"><div class="icon-circle" style="background:var(--coral);color:#fff;">❤️</div><div><h4>People Over Pixels</h4><p>Real conversations build stronger bonds than any chat app.</p></div></div>
+        <div class="card tinted feature-row"><div class="icon-circle" style="background:var(--coral);color:#fff;">🧘</div><div><h4>Mindfulness Grows</h4><p>Stepping away from screens helps us notice our thoughts more clearly.</p></div></div>
+        <div class="card tinted feature-row"><div class="icon-circle" style="background:var(--coral);color:#fff;">⭐</div><div><h4>Gratitude for Tech</h4><p>A day without it helps us appreciate the convenience it brings.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 10: QUOTES PART 1 -->
+  <section class="slide bg-navy-mid">
+    <div class="slide-inner">
+      <div class="head-block">
+        <div class="eyebrow" style="color:var(--gold);"><span class="dot" style="background:var(--gold);"></span>In Their Words</div>
+        <h2 class="title" style="color:var(--white);">What Others Have Said About Unplugging</h2>
+      </div>
+      <div class="grid-3">
+        <div class="quote-card">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">The more ways we have to connect, the more many of us seem desperate to unplug.</p>
+          <div class="quote-attr">Pico Iyer <span>— essayist &amp; novelist</span></div>
+        </div>
+        <div class="quote-card">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">Disconnecting from the digital world will help you reconnect with your wisdom and creativity.</p>
+          <div class="quote-attr">Arianna Huffington <span>— author &amp; entrepreneur</span></div>
+        </div>
+        <div class="quote-card">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">Almost everything will work again if you unplug it for a few minutes, including you.</p>
+          <div class="quote-attr">Anne Lamott <span>— author</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 11: QUOTES PART 2 -->
+  <section class="slide bg-navy-mid">
+    <div class="slide-inner">
+      <div class="head-block">
+        <div class="eyebrow" style="color:var(--gold);"><span class="dot" style="background:var(--gold);"></span>In Their Words</div>
+        <h2 class="title" style="color:var(--white);">More Voices on Stepping Away</h2>
+      </div>
+      <div class="grid-3">
+        <div class="quote-card">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">Technology is a good servant but a bad master.</p>
+          <div class="quote-attr">Justin Timberlake <span>— musician &amp; actor</span></div>
+        </div>
+        <div class="quote-card">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">It's so important to engage and be present in your own life.</p>
+          <div class="quote-attr">Emma Stone <span>— actress</span></div>
+        </div>
+        <div class="quote-card">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="quote-text">To reclaim solitude we have to learn to experience a moment of boredom as a reason to turn inward.</p>
+          <div class="quote-attr">Sherry Turkle <span>— MIT professor &amp; author</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 12: REFLECTION -->
+  <section class="slide bg-coral">
+    <div class="blob" style="top:-100px;right:-80px;width:280px;height:280px;background:rgba(255,255,255,0.08);"></div>
+    <div class="blob" style="bottom:-110px;left:-90px;width:260px;height:260px;background:rgba(47,60,126,0.18);"></div>
+    <div class="slide-inner" style="position:relative;z-index:2;">
+      <h2 class="reflection-text">"If you had to give up your phone for just one day, what would you miss the most — and what might you discover instead?"</h2>
+      <p class="closing-meta">Take a moment to reflect — there's no wrong answer.</p>
+    </div>
+  </section>
+
+  <!-- SLIDE 13: THANK YOU -->
+  <section class="slide bg-navy">
+    <div class="blob" style="top:-90px;left:-90px;width:300px;height:300px;background:radial-gradient(circle, rgba(249,231,149,0.18), rgba(249,231,149,0) 70%);"></div>
+    <div class="slide-inner" style="position:relative;z-index:2;text-align:center;">
+      <div class="icon-circle" style="background:var(--coral); color:#fff; width:64px; height:64px; font-size:1.6rem; margin:0 auto 24px;">👍</div>
+      <h2 style="font-size:clamp(2rem,5vw,3rem); color:var(--white); margin-bottom:14px;">Thank You!</h2>
+      <p style="color:var(--muted-light); font-style:italic; font-size:clamp(0.95rem,1.8vw,1.1rem); margin-bottom:28px;">Let's use technology wisely — and enjoy a little time without it too.</p>
+      <p class="closing-meta" style="color:var(--muted-light);">Created by <b style="color:var(--white);">Kanishk</b> · Grade 9 · LCA Club Activity · Sloka The School, Manikonda</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="deck-chrome">
+  <div class="progress-bar" id="progressBar"></div>
+  <div class="top-bar">
+    <div class="brand-mini"><span class="dot"></span>A Day Without Technology</div>
+    <div class="counter" id="counter">1 / 13</div>
+  </div>
+  <button class="nav-btn prev" id="prevBtn" aria-label="Previous slide">←</button>
+  <button class="nav-btn next" id="nextBtn" aria-label="Next slide">→</button>
+  <div class="hint">Use ← → arrow keys, swipe, or click the dots to navigate</div>
+  <div class="progress-dots" id="dots"></div>
+</div>
+
+<script>
+(function(){
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let current = 0;
+
+  const dotsWrap = document.getElementById('dots');
+  slides.forEach(function(_, i){
+    const b = document.createElement('button');
+    b.className = 'pdot';
+    b.setAttribute('aria-label', 'Go to slide ' + (i+1));
+    b.addEventListener('click', function(){ goTo(i); });
+    dotsWrap.appendChild(b);
+  });
+  const dotEls = Array.from(dotsWrap.children);
+
+  const counter = document.getElementById('counter');
+  const progressBar = document.getElementById('progressBar');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  function render(direction){
+    slides.forEach(function(s, i){
+      s.classList.remove('active','prev-exit','next-exit');
+      if (i === current) {
+        s.classList.add('active');
+      } else if (direction === 'next' && i === current - 1) {
+        s.classList.add('prev-exit');
+      } else if (direction === 'prev' && i === current + 1) {
+        s.classList.add('next-exit');
+      }
+    });
+    dotEls.forEach(function(d, i){ d.classList.toggle('active', i === current); });
+    counter.textContent = (current + 1) + ' / ' + total;
+    progressBar.style.width = (((current + 1) / total) * 100) + '%';
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+    const activeDot = dotEls[current];
+    if (activeDot) activeDot.scrollIntoView({ block: 'nearest', inline: 'center' });
+  }
+
+  window.goTo = function(index, direction){
+    if (index < 0 || index >= total || index === current) return;
+    const dir = direction || (index > current ? 'next' : 'prev');
+    current = index;
+    render(dir);
+  };
+
+  function next(){ if (current < total - 1) window.goTo(current + 1, 'next'); }
+  function prev(){ if (current > 0) window.goTo(current - 1, 'prev'); }
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
+
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') { e.preventDefault(); window.goTo(0, 'prev'); }
+    else if (e.key === 'End') { e.preventDefault(); window.goTo(total - 1, 'next'); }
+  });
+
+  // touch / swipe support
+  let touchStartX = null, touchStartY = null;
+  document.addEventListener('touchstart', function(e){
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+  document.addEventListener('touchend', function(e){
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) next(); else prev();
+    }
+    touchStartX = null; touchStartY = null;
+  }, { passive: true });
+
+  // hero clock
+  const display = document.getElementById('clockDisplay');
+  if (display) {
+    let totalSeconds = 24 * 3600;
+    function format(s){
+      const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = s%60;
+      return [h,m,sec].map(function(n){ return String(n).padStart(2,'0'); }).join(':');
+    }
+    display.textContent = format(totalSeconds);
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduced) {
+      setInterval(function(){
+        totalSeconds -= 1;
+        if (totalSeconds < 0) totalSeconds = 24 * 3600;
+        display.textContent = format(totalSeconds);
+      }, 1000);
+    }
+  }
+
+  render('next');
+})();
+</script>
+
+</body>
+</html>
