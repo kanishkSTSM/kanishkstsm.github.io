@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Day Without Technology — Kanishk</title>
+<meta name="description" content="A Day Without Technology — an LCA Club Activity project by Kanishk, Grade 9, Sloka The School, Manikonda.">
+<style>
+  :root{
+    --navy:#2F3C7E;
+    --navy-deep:#1A1F3D;
+    --coral:#F96167;
+    --coral-deep:#E14B52;
+    --gold:#F9E795;
+    --cream:#FFF9F2;
+    --ink:#2B2B2B;
+    --muted:#6B6B7A;
+    --muted-light:#A9ADD0;
+    --white:#FFFFFF;
+    --radius:18px;
+    --maxw:1100px;
+    --shadow:0 10px 30px rgba(26,31,61,0.10);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    font-family:Calibri, 'Segoe UI', Arial, sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3{
+    font-family:Cambria, 'Times New Roman', serif;
+    margin:0;
+  }
+
+  a{color:inherit;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(255,249,242,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(47,60,126,0.08);
+  }
+  .nav-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:14px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:Cambria, serif;
+    font-weight:bold;
+    font-size:1.05rem;
+    color:var(--navy);
+    white-space:nowrap;
+  }
+  .brand-dot{
+    width:10px;height:10px;border-radius:50%;
+    background:var(--coral);
+    flex-shrink:0;
+  }
+  nav.links{
+    display:flex;
+    gap:22px;
+    font-size:0.92rem;
+  }
+  nav.links a{
+    text-decoration:none;
+    color:var(--navy);
+    opacity:0.75;
+    padding:6px 2px;
+    border-bottom:2px solid transparent;
+    transition:opacity 0.2s, border-color 0.2s;
+  }
+  nav.links a:hover, nav.links a:focus-visible{
+    opacity:1;
+    border-color:var(--coral);
+  }
+  .nav-toggle{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding:8px;
+  }
+  .nav-toggle span{
+    display:block;
+    width:24px;height:2px;background:var(--navy);
+    margin:5px 0;
+    transition:transform 0.25s, opacity 0.25s;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:var(--navy-deep);
+    color:var(--white);
+    overflow:hidden;
+    padding:90px 0 70px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    top:-120px; right:-100px;
+    width:380px; height:380px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, rgba(249,97,103,0.35), rgba(249,97,103,0) 70%);
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    bottom:-160px; left:-120px;
+    width:420px; height:420px;
+    border-radius:50%;
+    background:radial-gradient(circle at 60% 40%, rgba(249,231,149,0.18), rgba(249,231,149,0) 70%);
+  }
+  .hero-inner{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.78rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+    font-weight:bold;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 5vw, 3.6rem);
+    line-height:1.08;
+    margin-bottom:18px;
+  }
+  .hero h1 .accent{color:var(--gold);}
+  .hero p.lede{
+    font-size:1.08rem;
+    color:var(--muted-light);
+    max-width:480px;
+    line-height:1.6;
+    margin-bottom:30px;
+  }
+  .hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 18px;
+    font-size:0.88rem;
+    color:var(--muted-light);
+  }
+  .hero-meta span{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .hero-meta b{color:var(--white); font-weight:600;}
+
+  .cta-row{
+    display:flex;
+    gap:14px;
+    margin-top:32px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:13px 24px;
+    border-radius:999px;
+    font-size:0.95rem;
+    font-weight:600;
+    text-decoration:none;
+    cursor:pointer;
+    border:none;
+    transition:transform 0.18s, box-shadow 0.18s, background 0.18s;
+  }
+  .btn-primary{
+    background:var(--coral);
+    color:var(--white);
+    box-shadow:0 8px 22px rgba(249,97,103,0.35);
+  }
+  .btn-primary:hover{background:var(--coral-deep); transform:translateY(-2px);}
+  .btn-ghost{
+    background:rgba(255,255,255,0.08);
+    color:var(--white);
+    border:1px solid rgba(255,255,255,0.25);
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,0.16);}
+
+  /* ---------- CLOCK (signature element) ---------- */
+  .clock-wrap{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  .clock-card{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:24px;
+    padding:34px 28px;
+    text-align:center;
+    width:100%;
+    max-width:320px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.25);
+  }
+  .clock-label{
+    font-size:0.74rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--muted-light);
+    margin-bottom:14px;
+  }
+  .clock-display{
+    font-family:'Courier New', Courier, monospace;
+    font-size:clamp(2.6rem, 7vw, 3.4rem);
+    font-weight:bold;
+    color:var(--gold);
+    letter-spacing:0.02em;
+    line-height:1;
+  }
+  .clock-sub{
+    margin-top:14px;
+    font-size:0.85rem;
+    color:var(--muted-light);
+  }
+  .power-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:20px;
+    padding:8px 16px;
+    border-radius:999px;
+    background:rgba(249,97,103,0.15);
+    color:var(--coral);
+    font-size:0.82rem;
+    font-weight:600;
+  }
+  .power-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--coral);
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1; transform:scale(1);}
+    50%{opacity:0.4; transform:scale(0.8);}
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{
+    padding:84px 0;
+  }
+  section.alt{
+    background:var(--white);
+  }
+  .section-head{
+    max-width:640px;
+    margin:0 auto 48px;
+    text-align:center;
+  }
+  .section-head .kicker{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:0.78rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--coral);
+    font-weight:bold;
+    margin-bottom:14px;
+  }
+  .kicker .dot{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--coral);
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem, 3.4vw, 2.5rem);
+    color:var(--navy);
+    line-height:1.2;
+    margin-bottom:14px;
+  }
+  .section-head p{
+    color:var(--muted);
+    font-size:1.02rem;
+    line-height:1.6;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* icon circle */
+  .icon-circle{
+    width:52px; height:52px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    font-size:1.3rem;
+  }
+
+  /* ---------- INTRO CARDS (no-phone/no-wifi/no-screens) ---------- */
+  .trio{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  .trio-card{
+    background:var(--cream);
+    border-radius:var(--radius);
+    padding:30px 22px;
+    text-align:center;
+    box-shadow:var(--shadow);
+  }
+  .trio-card .icon-circle{
+    margin:0 auto 16px;
+    background:var(--coral);
+    color:var(--white);
+  }
+  .trio-card h3{
+    font-size:1.1rem;
+    color:var(--navy);
+    margin-bottom:6px;
+  }
+  .trio-card p{
+    color:var(--muted);
+    font-size:0.92rem;
+    margin:0;
+  }
+
+  /* ---------- TWO-COL TOPIC (communication) ---------- */
+  .topic-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+  .topic-col h4{
+    font-size:0.95rem;
+    color:var(--navy);
+    margin-bottom:14px;
+    font-weight:700;
+  }
+  .topic-col ul{
+    list-style:none;
+    margin:0 0 18px;
+    padding:0;
+  }
+  .topic-col li{
+    position:relative;
+    padding-left:20px;
+    margin-bottom:12px;
+    color:var(--ink);
+    font-size:0.96rem;
+    line-height:1.5;
+  }
+  .topic-col li::before{
+    content:"";
+    position:absolute;
+    left:0; top:0.55em;
+    width:7px; height:7px;
+    border-radius:50%;
+    background:var(--coral);
+  }
+  .callout{
+    background:#FDEDEE;
+    border-radius:14px;
+    padding:18px 20px;
+    font-size:0.92rem;
+    color:var(--ink);
+    line-height:1.55;
+  }
+  .callout b{color:var(--coral-deep);}
+
+  /* ---------- CARD GRID (education / activities) ---------- */
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+  }
+  .feature-card{
+    background:var(--white);
+    border-radius:14px;
+    padding:22px;
+    display:flex;
+    gap:16px;
+    box-shadow:var(--shadow);
+  }
+  .feature-card .icon-circle{
+    background:var(--navy);
+    color:var(--white);
+  }
+  .feature-card h4{
+    font-size:1.0rem;
+    color:var(--navy);
+    margin-bottom:6px;
+  }
+  .feature-card p{
+    font-size:0.9rem;
+    color:var(--muted);
+    margin:0;
+    line-height:1.5;
+  }
+
+  .activity-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+  }
+  .activity-tile{
+    background:var(--cream);
+    border-radius:14px;
+    padding:24px 16px;
+    text-align:center;
+  }
+  .activity-tile .icon-circle{
+    margin:0 auto 12px;
+    color:var(--white);
+  }
+  .activity-tile h4{
+    font-size:0.95rem;
+    color:var(--navy);
+  }
+
+  /* ---------- ADVANTAGES / DISADVANTAGES ---------- */
+  .balance-section{
+    background:var(--navy-deep);
+    color:var(--white);
+  }
+  .balance-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .balance-card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:var(--radius);
+    padding:30px 26px;
+  }
+  .balance-card.good{border-color:rgba(76,175,125,0.3);}
+  .balance-card.bad{border-color:rgba(249,97,103,0.3);}
+  .balance-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:20px;
+  }
+  .balance-head .icon-circle{
+    width:42px;height:42px;
+    font-size:1.05rem;
+  }
+  .balance-head h3{
+    font-size:1.25rem;
+    color:var(--white);
+  }
+  .balance-card.good .icon-circle{background:#4CAF7D;color:var(--white);}
+  .balance-card.bad .icon-circle{background:var(--coral);color:var(--white);}
+  .balance-card ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .balance-card li{
+    position:relative;
+    padding-left:22px;
+    margin-bottom:13px;
+    font-size:0.94rem;
+    color:var(--muted-light);
+    line-height:1.5;
+  }
+  .balance-card.good li::before{content:"+"; position:absolute; left:0; color:#4CAF7D; font-weight:bold;}
+  .balance-card.bad li::before{content:"–"; position:absolute; left:0; color:var(--coral); font-weight:bold;}
+
+  /* ---------- STATS ---------- */
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  .stat-card{
+    background:var(--navy);
+    color:var(--white);
+    border-radius:var(--radius);
+    padding:30px 20px;
+    text-align:center;
+  }
+  .stat-big{
+    font-family:Cambria, serif;
+    font-size:clamp(2rem, 4vw, 2.6rem);
+    font-weight:bold;
+    color:var(--gold);
+    margin-bottom:8px;
+  }
+  .stat-label{
+    font-size:0.88rem;
+    color:var(--muted-light);
+    line-height:1.4;
+  }
+  .stats-source{
+    text-align:center;
+    font-size:0.82rem;
+    color:var(--muted);
+    margin-top:24px;
+    font-style:italic;
+  }
+
+  /* ---------- LESSONS ---------- */
+  .lesson-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+  }
+  .lesson-card{
+    background:var(--cream);
+    border-radius:14px;
+    padding:24px;
+    display:flex;
+    gap:16px;
+  }
+  .lesson-card .icon-circle{
+    background:var(--coral);
+    color:var(--white);
+  }
+  .lesson-card h4{
+    font-size:1.0rem;
+    color:var(--navy);
+    margin-bottom:6px;
+  }
+  .lesson-card p{
+    font-size:0.9rem;
+    color:var(--ink);
+    margin:0;
+    line-height:1.5;
+  }
+
+  /* ---------- QUOTES ---------- */
+  .quotes-section{
+    background:linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:var(--white);
+    position:relative;
+    overflow:hidden;
+  }
+  .quotes-section::before{
+    content:"\201C";
+    position:absolute;
+    top:-40px; left:20px;
+    font-family:Cambria, serif;
+    font-size:280px;
+    color:rgba(255,255,255,0.04);
+    line-height:1;
+  }
+  .quote-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+    position:relative;
+    z-index:1;
+  }
+  .quote-card{
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:16px;
+    padding:26px 24px;
+  }
+  .quote-mark{
+    font-family:Cambria, serif;
+    font-size:2.2rem;
+    color:var(--gold);
+    line-height:1;
+    margin-bottom:8px;
+    display:block;
+  }
+  .quote-card p.quote-text{
+    font-family:Cambria, serif;
+    font-style:italic;
+    font-size:1.05rem;
+    line-height:1.5;
+    color:var(--white);
+    margin:0 0 14px;
+  }
+  .quote-attr{
+    font-size:0.86rem;
+    color:var(--gold);
+    font-weight:600;
+  }
+  .quote-attr span{
+    color:var(--muted-light);
+    font-weight:400;
+  }
+
+  /* ---------- REFLECTION ---------- */
+  .reflection{
+    background:var(--coral);
+    color:var(--white);
+    text-align:center;
+    padding:90px 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .reflection::before{
+    content:"";
+    position:absolute;
+    top:-100px; right:-80px;
+    width:300px;height:300px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+  }
+  .reflection::after{
+    content:"";
+    position:absolute;
+    bottom:-120px; left:-100px;
+    width:280px;height:280px;
+    border-radius:50%;
+    background:rgba(47,60,126,0.18);
+  }
+  .reflection-inner{
+    position:relative;
+    z-index:1;
+    max-width:720px;
+    margin:0 auto;
+  }
+  .reflection h2{
+    font-size:clamp(1.5rem, 3.6vw, 2.1rem);
+    font-style:italic;
+    line-height:1.4;
+    margin-bottom:18px;
+  }
+  .reflection p{
+    color:#FFE8E9;
+    font-size:1rem;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--navy-deep);
+    color:var(--muted-light);
+    padding:48px 0 28px;
+  }
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:16px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    padding-bottom:28px;
+    margin-bottom:20px;
+  }
+  .footer-brand{
+    font-family:Cambria, serif;
+    font-size:1.05rem;
+    color:var(--white);
+  }
+  .footer-credit{
+    font-size:0.85rem;
+  }
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    font-size:0.8rem;
+    color:var(--muted-light);
+  }
+
+  /* ---------- back to top ---------- */
+  .top-btn{
+    position:fixed;
+    bottom:24px; right:24px;
+    width:46px; height:46px;
+    border-radius:50%;
+    background:var(--coral);
+    color:var(--white);
+    border:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(249,97,103,0.4);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 0.25s, transform 0.25s;
+    z-index:200;
+    font-size:1.1rem;
+  }
+  .top-btn.show{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .top-btn:hover{transform:translateY(-3px);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    .hero-inner{grid-template-columns:1fr; gap:36px;}
+    .clock-wrap{order:-1;}
+    .clock-card{max-width:280px; margin:0 auto;}
+    .trio{grid-template-columns:1fr;}
+    .topic-grid{grid-template-columns:1fr; gap:20px;}
+    .card-grid{grid-template-columns:1fr;}
+    .activity-grid{grid-template-columns:repeat(2,1fr);}
+    .balance-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr;}
+    .lesson-grid{grid-template-columns:1fr;}
+    .quote-grid{grid-template-columns:1fr;}
+    section{padding:64px 0;}
+  }
+
+  @media (max-width:640px){
+    nav.links{
+      position:absolute;
+      top:100%; left:0; right:0;
+      background:var(--cream);
+      flex-direction:column;
+      padding:10px 24px 18px;
+      gap:4px;
+      border-bottom:1px solid rgba(47,60,126,0.08);
+      box-shadow:0 12px 24px rgba(0,0,0,0.08);
+      display:none;
+    }
+    nav.links.open{display:flex;}
+    nav.links a{padding:10px 4px; border-bottom:1px solid rgba(47,60,126,0.06);}
+    .nav-toggle{display:block;}
+    .hero{padding:64px 0 48px;}
+    .hero-meta{font-size:0.82rem;}
+    .activity-grid{grid-template-columns:1fr 1fr;}
+    .footer-inner{flex-direction:column; align-items:flex-start;}
+  }
+
+  @media (max-width:420px){
+    .activity-grid{grid-template-columns:1fr;}
+  }
+
+  :focus-visible{
+    outline:2px solid var(--coral);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="brand-dot"></span> A Day Without Technology</div>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="links" id="navLinks">
+      <a href="#communication">Communication</a>
+      <a href="#education">Education</a>
+      <a href="#activities">Daily Life</a>
+      <a href="#balance">Pros &amp; Cons</a>
+      <a href="#quotes">Quotes</a>
+      <a href="#reflect">Reflect</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="eyebrow">LCA Club Activity · Grade 9</div>
+      <h1>A Day Without<br><span class="accent">Technology</span></h1>
+      <p class="lede">Unplugging from screens for 24 hours — what would we gain, what would we miss, and what would we finally notice?</p>
+      <div class="hero-meta">
+        <span>By <b>Kanishk</b></span>
+        <span>·</span>
+        <span><b>Sloka The School</b>, Manikonda</span>
+      </div>
+      <div class="cta-row">
+        <a href="#communication" class="btn btn-primary">Start Exploring ↓</a>
+        <a href="#quotes" class="btn btn-ghost">Read the Quotes</a>
+      </div>
+    </div>
+    <div class="clock-wrap">
+      <div class="clock-card">
+        <div class="clock-label">Hours Without Screens</div>
+        <div class="clock-display" id="clockDisplay">24:00:00</div>
+        <div class="clock-sub">One full day. Zero devices.</div>
+        <div class="power-pill"><span class="power-dot"></span> Devices powered off</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker"><span class="dot"></span> The Thought Experiment</div>
+      <h2>Imagine Waking Up Tomorrow…</h2>
+      <p>No phone. No Wi-Fi. No screens at all — for 24 hours. Technology is woven into nearly every minute of our day, so what actually happens when we take it all away?</p>
+    </div>
+    <div class="trio">
+      <div class="trio-card reveal">
+        <div class="icon-circle">📵</div>
+        <h3>No Phone</h3>
+        <p>No calls, no texts</p>
+      </div>
+      <div class="trio-card reveal">
+        <div class="icon-circle">📡</div>
+        <h3>No Internet</h3>
+        <p>No browsing, no apps</p>
+      </div>
+      <div class="trio-card reveal">
+        <div class="icon-circle">💻</div>
+        <h3>No Screens</h3>
+        <p>No TV, no laptop</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="communication">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker"><span class="dot"></span> Staying in Touch</div>
+      <h2>Communication Without Phones or the Internet</h2>
+      <p>When the fastest way to reach someone is on foot or by letter, conversations change shape entirely.</p>
+    </div>
+    <div class="topic-grid">
+      <div class="topic-col reveal">
+        <h4>What Changes</h4>
+        <ul>
+          <li>Letters and handwritten notes make a comeback</li>
+          <li>Face-to-face conversations replace texting</li>
+          <li>Visiting a friend's home instead of a video call</li>
+        </ul>
+        <div class="callout"><b>The Upside:</b> Conversations slow down. People listen more, interrupt less, and remember details better than a quick chat thread.</div>
+      </div>
+      <div class="topic-col reveal">
+        <h4>The Challenge</h4>
+        <ul>
+          <li>Messages take longer — patience becomes essential</li>
+          <li>Coordinating plans with many people gets harder</li>
+          <li>Emergency contact becomes slower and riskier</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker"><span class="dot"></span> Learning Differently</div>
+      <h2>Education Without Technology</h2>
+      <p>Knowledge doesn't disappear without the internet — it just travels through different channels.</p>
+    </div>
+    <div class="card-grid">
+      <div class="feature-card reveal">
+        <div class="icon-circle">📖</div>
+        <div>
+          <h4>Back to Books</h4>
+          <p>Libraries and printed textbooks become the main source of knowledge instead of instant search engines.</p>
+        </div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon-circle">✍️</div>
+        <div>
+          <h4>Handwritten Learning</h4>
+          <p>Notes, essays, and projects are written by hand — slower, but often better remembered.</p>
+        </div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon-circle">👥</div>
+        <div>
+          <h4>Group Study &amp; Discussion</h4>
+          <p>Students rely on classmates, teachers, and discussion groups rather than online tutorials.</p>
+        </div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon-circle">🧠</div>
+        <div>
+          <h4>Deeper Focus</h4>
+          <p>Without notifications, studying becomes a single, focused task instead of constant multitasking.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="activities">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker"><span class="dot"></span> Filling the Hours</div>
+      <h2>Daily Activities &amp; Entertainment</h2>
+      <p>How would we fill the hours usually spent on screens?</p>
+    </div>
+    <div class="activity-grid">
+      <div class="activity-tile reveal"><div class="icon-circle" style="background:#5FA777;margin:0 auto 12px;">🌳</div><h4>Outdoor Play</h4></div>
+      <div class="activity-tile reveal"><div class="icon-circle" style="background:#F96167;margin:0 auto 12px;">🎨</div><h4>Art &amp; Crafts</h4></div>
+      <div class="activity-tile reveal"><div class="icon-circle" style="background:#2F3C7E;margin:0 auto 12px;">♞</div><h4>Board Games</h4></div>
+      <div class="activity-tile reveal"><div class="icon-circle" style="background:#C18A2D;margin:0 auto 12px;">📚</div><h4>Reading Books</h4></div>
+      <div class="activity-tile reveal"><div class="icon-circle" style="background:#8B5E3C;margin:0 auto 12px;">🍽️</div><h4>Family Meals</h4></div>
+      <div class="activity-tile reveal"><div class="icon-circle" style="background:#3D8B8B;margin:0 auto 12px;">🚶</div><h4>Walks Outside</h4></div>
+    </div>
+  </div>
+</section>
+
+<section class="balance-section" id="balance">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker" style="color:var(--gold);"><span class="dot" style="background:var(--gold);"></span> Weighing It Up</div>
+      <h2 style="color:var(--white);">Advantages &amp; Disadvantages</h2>
+      <p style="color:var(--muted-light);">A day without devices isn't simply good or bad — it's a trade-off worth understanding.</p>
+    </div>
+    <div class="balance-grid">
+      <div class="balance-card good reveal">
+        <div class="balance-head">
+          <div class="icon-circle">✓</div>
+          <h3>Advantages</h3>
+        </div>
+        <ul>
+          <li>Better focus — fewer notifications mean longer, deeper concentration</li>
+          <li>Improved sleep — no late-night screens means more restful nights</li>
+          <li>Real connection — more meaningful time with family and friends</li>
+          <li>More activity — more movement, outdoor play, and exercise</li>
+        </ul>
+      </div>
+      <div class="balance-card bad reveal">
+        <div class="balance-head">
+          <div class="icon-circle">✕</div>
+          <h3>Disadvantages</h3>
+        </div>
+        <ul>
+          <li>Slower tasks — simple things like paying bills take longer</li>
+          <li>Delayed information — news and updates no longer arrive instantly</li>
+          <li>Emergency risk — harder to reach help quickly when needed</li>
+          <li>Work &amp; study limits — online classes and research become impossible</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker"><span class="dot"></span> The Bigger Picture</div>
+      <h2>Why Technology Matters in Modern Life</h2>
+      <p>A day without it is a thought experiment — but technology's role in the other 364 days is hard to overstate.</p>
+    </div>
+    <div class="card-grid">
+      <div class="feature-card reveal">
+        <div class="icon-circle">🌐</div>
+        <div>
+          <h4>Connects the World</h4>
+          <p>Instant communication links families, friends, and communities across distances.</p>
+        </div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon-circle">🎓</div>
+        <div>
+          <h4>Powers Learning</h4>
+          <p>Online courses, research tools, and digital libraries open access to knowledge for everyone.</p>
+        </div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon-circle">🩺</div>
+        <div>
+          <h4>Drives Healthcare</h4>
+          <p>Telemedicine, diagnostics, and medical research save lives every single day.</p>
+        </div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="icon-circle">💼</div>
+        <div>
+          <h4>Runs Economies</h4>
+          <p>Businesses, banking, and global trade depend on digital systems to function.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker"><span class="dot"></span> Did You Know</div>
+      <h2>A Few Numbers Worth Sitting With</h2>
+      <p>Statistics that show how deeply technology shapes our day, every day.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-big">6–7 hrs</div>
+        <div class="stat-label">average daily screen time for teens worldwide</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-big">96%</div>
+        <div class="stat-label">of teens go online daily, many almost constantly</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-big">144</div>
+        <div class="stat-label">average phone checks per person, per day</div>
+      </div>
+    </div>
+    <p class="stats-source">Source: Common Sense Media &amp; Pew Research, teen digital media use surveys</p>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker"><span class="dot"></span> Takeaways</div>
+      <h2>Lessons We Can Learn</h2>
+      <p>From a single technology-free day, a few ideas worth carrying into every day.</p>
+    </div>
+    <div class="lesson-grid">
+      <div class="lesson-card reveal">
+        <div class="icon-circle">⚖️</div>
+        <div>
+          <h4>Balance Matters</h4>
+          <p>Technology is a tool, not a lifestyle — using it with intention matters more than using it constantly.</p>
+        </div>
+      </div>
+      <div class="lesson-card reveal">
+        <div class="icon-circle">❤️</div>
+        <div>
+          <h4>People Over Pixels</h4>
+          <p>Real conversations and shared moments build stronger bonds than any chat app.</p>
+        </div>
+      </div>
+      <div class="lesson-card reveal">
+        <div class="icon-circle">🧘</div>
+        <div>
+          <h4>Mindfulness Grows</h4>
+          <p>Stepping away from screens helps us notice our thoughts, surroundings, and feelings more clearly.</p>
+        </div>
+      </div>
+      <div class="lesson-card reveal">
+        <div class="icon-circle">⭐</div>
+        <div>
+          <h4>Gratitude for Tech</h4>
+          <p>A day without it helps us appreciate how much convenience technology truly brings.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quotes-section" id="quotes">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="kicker" style="color:var(--gold);"><span class="dot" style="background:var(--gold);"></span> In Their Words</div>
+      <h2 style="color:var(--white);">What Others Have Said About Unplugging</h2>
+      <p style="color:var(--muted-light);">Writers, journalists, and public figures on stepping away from our screens.</p>
+    </div>
+    <div class="quote-grid">
+      <div class="quote-card reveal">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">The more ways we have to connect, the more many of us seem desperate to unplug.</p>
+        <div class="quote-attr">Pico Iyer <span>— essayist &amp; novelist</span></div>
+      </div>
+      <div class="quote-card reveal">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">Disconnecting from the digital world will help you reconnect with your wisdom, intuition, and creativity.</p>
+        <div class="quote-attr">Arianna Huffington <span>— author &amp; entrepreneur</span></div>
+      </div>
+      <div class="quote-card reveal">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">Almost everything will work again if you unplug it for a few minutes, including you.</p>
+        <div class="quote-attr">Anne Lamott <span>— author</span></div>
+      </div>
+      <div class="quote-card reveal">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">Technology is a good servant but a bad master.</p>
+        <div class="quote-attr">Justin Timberlake <span>— musician &amp; actor</span></div>
+      </div>
+      <div class="quote-card reveal">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">It's so important to engage and be present in your own life.</p>
+        <div class="quote-attr">Emma Stone <span>— actress</span></div>
+      </div>
+      <div class="quote-card reveal">
+        <span class="quote-mark">&ldquo;</span>
+        <p class="quote-text">To reclaim solitude we have to learn to experience a moment of boredom as a reason to turn inward.</p>
+        <div class="quote-attr">Sherry Turkle <span>— MIT professor &amp; author</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reflection" id="reflect">
+  <div class="wrap reflection-inner">
+    <h2>"If you had to give up your phone for just one day, what would you miss the most — and what might you discover instead?"</h2>
+    <p>Take a moment to reflect — there's no wrong answer.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-brand">A Day Without Technology</div>
+      <div class="footer-credit">Created by <b>Kanishk</b> · Grade 9 · LCA Club Activity</div>
+    </div>
+    <div class="footer-bottom">
+      <span>Sloka The School, Manikonda</span>
+      <span>Let's use technology wisely — and enjoy a little time without it too.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="top-btn" id="topBtn" aria-label="Back to top">↑</button>
+
+<script>
+  // Mobile nav toggle
+  (function(){
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', function(){
+      const isOpen = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    links.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+
+  // Scroll reveal animation
+  (function(){
+    const items = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function(el){ el.classList.add('is-visible'); });
+      return;
+    }
+    const observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(function(el){ observer.observe(el); });
+  })();
+
+  // Hero clock — gentle countdown loop themed around "24 hours unplugged"
+  (function(){
+    const display = document.getElementById('clockDisplay');
+    if (!display) return;
+    let totalSeconds = 24 * 3600;
+    function format(s){
+      const h = Math.floor(s/3600);
+      const m = Math.floor((s%3600)/60);
+      const sec = s%60;
+      return [h,m,sec].map(function(n){ return String(n).padStart(2,'0'); }).join(':');
+    }
+    display.textContent = format(totalSeconds);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+    setInterval(function(){
+      totalSeconds -= 1;
+      if (totalSeconds < 0) totalSeconds = 24 * 3600;
+      display.textContent = format(totalSeconds);
+    }, 1000);
+  })();
+
+  // Back to top button
+  (function(){
+    const btn = document.getElementById('topBtn');
+    window.addEventListener('scroll', function(){
+      if (window.scrollY > 500) btn.classList.add('show');
+      else btn.classList.remove('show');
+    });
+    btn.addEventListener('click', function(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>
